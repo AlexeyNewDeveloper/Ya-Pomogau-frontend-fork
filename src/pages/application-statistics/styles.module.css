@@ -5,23 +5,49 @@
 
 .period {
   max-width: 353px;
+  box-sizing: border-box;
+  padding: 12px 0 10px;
+  margin-bottom: 20px;
 }
 
 .period__fields {
   display: flex;
   box-sizing: border-box;
   padding-left: 14px;
+  align-items: center;
 }
 
 .period__points {
   margin: 0 10px 0;
+  font-size: 12px;
 }
 
 .period__points:first-child {
   margin-left: 0;
 }
 
-.period__input {
-  max-width: 96px;
+.period__input_field {
   padding: 10px 10px 9px;
+  transition: var(--transition-hover);
+  height: 34px;
+  color: var(--colors-interface-primary);
+  border: 1px solid var(--colors-interface-primary-additional);
+  box-sizing: border-box;
+  font-size: 12px;
+  line-height: 12px;
+  max-width: 96px;
+}
+
+.status_application {
+  max-width: 464px;
+  box-sizing: border-box;
+  padding: 12px 14px 0 7px;
+  margin-bottom: 20px;
+}
+
+.status_application__fields {
+}
+
+.select_container {
+  position: static;
 }

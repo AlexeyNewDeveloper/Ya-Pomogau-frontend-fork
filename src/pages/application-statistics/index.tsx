@@ -5,8 +5,19 @@ import styles from './styles.module.css';
 import Fieldset from 'shared/ui/fieldset';
 import { FieldsetView } from 'shared/ui/fieldset/utils';
 import { Input } from 'shared/ui/input';
+import { Select } from 'shared/ui/select';
+
+interface IStatusApplicationOptions {
+  value: 'open' | 'atWork' | 'close';
+  label: 'Открытые' | 'В работе' | 'Закрытые';
+}
 
 export const ApplicationsStatisticsPage = () => {
+  const statusApplicationOptions: Array<IStatusApplicationOptions> = [
+    { value: 'open', label: 'Открытые' },
+    { value: 'atWork', label: 'В работе' },
+    { value: 'close', label: 'Закрытые' },
+  ];
   return (
     <>
       <SmartHeader
@@ -22,7 +33,7 @@ export const ApplicationsStatisticsPage = () => {
               <Input
                 name="from"
                 placeholder="дд.мм.гггг"
-                extClassName={styles.period__input}
+                extClassNameInput={styles.period__input_field}
                 onChange={() => {
                   console.log('click from');
                 }}
@@ -32,8 +43,25 @@ export const ApplicationsStatisticsPage = () => {
                 name="to"
                 placeholder="дд.мм.гггг"
                 extClassName={styles.period__input}
+                extClassNameInput={styles.period__input_field}
                 onChange={() => {
                   console.log('click to');
+                }}
+              />
+            </div>
+          </Fieldset>
+        </div>
+        <div className={styles.status_application}>
+          <Fieldset title="Статус заявки" view={FieldsetView.COLUMN}>
+            <div className={styles.status_application__fields}>
+              <Select
+                name="status_application"
+                placeholder="Выберите статус заявки"
+                defaultValue="open"
+                extClassName={styles.select_container}
+                options={statusApplicationOptions}
+                onChange={() => {
+                  console.log('Click accordion');
                 }}
               />
             </div>
