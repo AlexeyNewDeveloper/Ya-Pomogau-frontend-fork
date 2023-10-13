@@ -29,6 +29,7 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   extClassName?: string;
   selectedValue?: string;
+  selectPlaceholder?: boolean;
 }
 
 // eslint-disable-next-line import/no-named-as-default-member, react/display-name
@@ -42,6 +43,7 @@ export const Select = React.forwardRef<HTMLSelectElement, Props>(
       label,
       extClassName,
       selectedValue,
+      selectPlaceholder,
       ...props
     },
     ref
@@ -64,7 +66,7 @@ export const Select = React.forwardRef<HTMLSelectElement, Props>(
           id={id}
           {...props}
         >
-          <option disabled value="">
+          <option disabled value="" selected={selectPlaceholder}>
             {placeholder}
           </option>
           {options.map((option, index) => (
