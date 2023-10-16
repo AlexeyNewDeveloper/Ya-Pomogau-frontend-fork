@@ -14,6 +14,7 @@ interface IAccordionProps {
   };
   arrayOptions: Array<{ value: string; label: string }>;
   name: string;
+  placeholder: string;
   onChange: (value: string) => void;
 }
 
@@ -22,6 +23,7 @@ export const Accordion = ({
   arrayOptions,
   name,
   onChange,
+  placeholder,
 }: IAccordionProps) => {
   const [isOpenList, setIsOpenList] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
@@ -55,7 +57,7 @@ export const Accordion = ({
         name="buttonToggleList"
         onClick={handleButtonOpenList}
       >
-        <div>Выберите статус заявки</div>
+        <div>{placeholder}</div>
         <IconArrow extClassName={isOpenList ? styles.icon_arrow : ''} />
       </button>
       {isOpenList && (

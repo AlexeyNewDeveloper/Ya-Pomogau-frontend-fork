@@ -16,7 +16,7 @@ interface IStatusApplicationOptions {
   label: 'Открытые' | 'В работе' | 'Закрытые';
 }
 
-enum Buttons {
+export enum ButtonsNameForStatisticsPage {
   generateReport = 'generateReport',
   downloadReport = 'downloadReport',
 }
@@ -91,10 +91,10 @@ export const ApplicationsStatisticsPage = () => {
       statusApplication: selectedCategoryFromAccordion,
       currentStatusApplication: currentStatusApplicationCheckbox,
     };
-    if (buttonName.name === Buttons.downloadReport) {
+    if (buttonName.name === ButtonsNameForStatisticsPage.downloadReport) {
       console.log(formData);
     }
-    if (buttonName.name === Buttons.generateReport) {
+    if (buttonName.name === ButtonsNameForStatisticsPage.generateReport) {
       console.log(formData);
     }
   };
@@ -145,6 +145,7 @@ export const ApplicationsStatisticsPage = () => {
                 name="status_application"
                 arrayOptions={statusApplicationOptions}
                 onChange={handleFormAccordion}
+                placeholder="Выберите статус заявки"
               />
             </div>
           </Fieldset>
@@ -161,16 +162,16 @@ export const ApplicationsStatisticsPage = () => {
             buttonType="primary"
             label="Сформировать отчет"
             actionType="submit"
-            id={Buttons.generateReport}
-            name={Buttons.generateReport}
+            id={ButtonsNameForStatisticsPage.generateReport}
+            name={ButtonsNameForStatisticsPage.generateReport}
             disabled={disabledButton}
           />
           <Button
             buttonType="secondary"
             label="Скачать отчет"
             actionType="submit"
-            id={Buttons.downloadReport}
-            name={Buttons.downloadReport}
+            id={ButtonsNameForStatisticsPage.downloadReport}
+            name={ButtonsNameForStatisticsPage.downloadReport}
             disabled={disabledButton}
             customIcon={<img src={excelIconImage} alt="excelIcon" />}
           />
