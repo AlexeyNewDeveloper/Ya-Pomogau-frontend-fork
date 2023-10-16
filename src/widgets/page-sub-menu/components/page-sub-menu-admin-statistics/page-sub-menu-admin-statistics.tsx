@@ -2,9 +2,15 @@ import { PageSubMenu } from '../page-sub-menu/page-sub-menu';
 import { PageSubMenuLink } from '../page-sub-menu-link/page-sub-menu-link';
 import styles from './styles.module.css';
 
-export const PageSubMenuAdminStatistics = () => {
+interface IPageSubMenuAdminStatisticsProps {
+  extClassName?: string;
+}
+
+export const PageSubMenuAdminStatistics = ({
+  extClassName,
+}: IPageSubMenuAdminStatisticsProps) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${extClassName}`}>
       <PageSubMenu
         links={
           <>

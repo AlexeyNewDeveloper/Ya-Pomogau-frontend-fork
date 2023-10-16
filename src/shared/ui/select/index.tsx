@@ -8,7 +8,7 @@ type TIconArrow = {
   extClassName?: string;
 };
 
-const IconArrow = ({ extClassName }: TIconArrow) => (
+export const IconArrow = ({ extClassName }: TIconArrow) => (
   <svg
     className={extClassName}
     width="24"

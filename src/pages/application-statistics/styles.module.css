@@ -1,3 +1,7 @@
+.submenu {
+  padding: 13px 0;
+}
+
 .wrapper {
   margin-left: 30px;
   margin-top: 20px;
@@ -49,5 +53,15 @@
 }
 
 .select_container {
-  position: static;
+}
+
+.current_status_application_checkbox {
+  padding: 11px 15px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.buttons_container {
+  display: flex;
+  gap: 20px;
 }
