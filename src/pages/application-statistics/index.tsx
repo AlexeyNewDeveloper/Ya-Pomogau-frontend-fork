@@ -47,14 +47,35 @@ export const ApplicationsStatisticsPage = () => {
     setSelectedCategoryFromAccordion(value);
   };
 
+  function daysInMonth(month: number, year: number): number {
+    return new Date(year, month, 0).getDate();
+  }
+
+  const validatePeriod = (value: string): boolean => {
+    const arrayDateValues = value.split('.');
+    const date = Number(arrayDateValues[0]);
+    const month = Number(arrayDateValues[1]);
+    const year = Number(arrayDateValues[2]);
+    if (month > 12 || date >= daysInMonth(month, year)) {
+      return false;
+    }
+    return true;
+  };
+
   const handleInputDate = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     const element = e.target as HTMLInputElement;
+    if (element.value.length > templateDatePeriod.length) {
+      return;
+    }
     switch (element.name) {
       case 'from':
         setPeriod({ ...period, from: element.value });
         if (element.value.length === templateDatePeriod.length) {
-          if (!regexDate.test(element.value)) {
+          if (
+            !regexDate.test(element.value) ||
+            !validatePeriod(element.value)
+          ) {
             console.log('неправильный формат даты в поле ОТ');
             setPeriod({ ...period, from: null });
           }
@@ -63,7 +84,10 @@ export const ApplicationsStatisticsPage = () => {
       case 'to':
         setPeriod({ ...period, to: element.value });
         if (element.value.length === templateDatePeriod.length) {
-          if (!regexDate.test(element.value)) {
+          if (
+            !regexDate.test(element.value) ||
+            !validatePeriod(element.value)
+          ) {
             console.log('неправильный формат даты в поле ДО');
             setPeriod({ ...period, to: null });
           }
