@@ -2,4 +2,6 @@
   display: flex;
   flex-flow: row nowrap;
   gap: 40px;
+  padding: 13px 0;
+  margin-left: 30px;
 }

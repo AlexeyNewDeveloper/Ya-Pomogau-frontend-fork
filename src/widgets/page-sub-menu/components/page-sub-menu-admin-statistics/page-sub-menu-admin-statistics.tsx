@@ -10,21 +10,16 @@ export const PageSubMenuAdminStatistics = ({
   extClassName,
 }: IPageSubMenuAdminStatisticsProps) => {
   return (
-    <div className={`${styles.wrapper} ${extClassName}`}>
-      <PageSubMenu
-        links={
-          <>
-            <PageSubMenuLink
-              to="/profile/statistics/applications"
-              text="Заявки"
-            />
-            <PageSubMenuLink
-              to="/profile/statistics/users"
-              text="Пользователи"
-            />
-          </>
-        }
-      />
-    </div>
+    <PageSubMenu
+      links={
+        <>
+          <PageSubMenuLink
+            to="/profile/statistics/applications"
+            text="Заявки"
+          />
+          <PageSubMenuLink to="/profile/statistics/users" text="Пользователи" />
+        </>
+      }
+    />
   );
 };

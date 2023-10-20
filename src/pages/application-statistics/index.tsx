@@ -132,7 +132,7 @@ export const ApplicationsStatisticsPage = () => {
         icon={<Icon color="blue" icon="StatisticIcon" size="54" />}
         text="Статистика"
       />
-      <PageSubMenuAdminStatistics extClassName={styles.submenu} />
+      <PageSubMenuAdminStatistics />
       <form
         id="applicationStatisticForm"
         name="applicationStatisticForm"
