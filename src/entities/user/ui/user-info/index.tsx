@@ -26,14 +26,16 @@ export const UserInfo = () => {
     if (role === 'admin') return 2;
     if (!role) return null;
   };
-  const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
+  // Почему то здесь мы делаем запрос на сервер, для получения юзера, хотя он должен у нас хранится в сторе при логине
+  // const { data: user } = useGetUserByIdQuery(userId() ?? skipToken);
 
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
   const [updateUserData, { isLoading, error }] = useUpdateUsersMutation();
-  const isAuth = useUser();
+  const user = useUser();
+  const isAuth = user?.isActive;
 
   const buttonRef = useRef<HTMLButtonElement>(null);
 
