@@ -47,19 +47,38 @@ export const ApplicationsStatisticsPage = () => {
     setSelectedCategoryFromAccordion(value);
   };
 
-  function daysInMonth(month: number, year: number): number {
-    return new Date(year, month, 0).getDate();
-  }
-
-  const validatePeriod = (value: string): boolean => {
+  const splitDateField = (value: string): number[] => {
     const arrayDateValues = value.split('.');
     const date = Number(arrayDateValues[0]);
     const month = Number(arrayDateValues[1]);
     const year = Number(arrayDateValues[2]);
-    if (month > 12 || date >= daysInMonth(month, year)) {
+    return [date, month, year];
+  };
+
+  function daysInMonth(month: number, year: number): number {
+    return new Date(year, month, 0).getDate();
+  }
+
+  const validatePeriodField = (value: string): boolean => {
+    const [date, month, year] = splitDateField(value);
+    if (
+      month > 12 ||
+      date >= daysInMonth(month, year) ||
+      year > new Date().getFullYear()
+    ) {
       return false;
     }
     return true;
+  };
+
+  const checkAndSetPeriodField = (fieldName: string, value: string): void => {
+    setPeriod({ ...period, [fieldName]: value });
+    if (value.length === templateDatePeriod.length) {
+      if (!regexDate.test(value) || !validatePeriodField(value)) {
+        console.log(`incorrect date format in the field "${fieldName}"`);
+        setPeriod({ ...period, [fieldName]: null });
+      }
+    }
   };
 
   const handleInputDate = (e: React.FormEvent<HTMLInputElement>) => {
@@ -70,28 +89,10 @@ export const ApplicationsStatisticsPage = () => {
     }
     switch (element.name) {
       case 'from':
-        setPeriod({ ...period, from: element.value });
-        if (element.value.length === templateDatePeriod.length) {
-          if (
-            !regexDate.test(element.value) ||
-            !validatePeriod(element.value)
-          ) {
-            console.log('неправильный формат даты в поле ОТ');
-            setPeriod({ ...period, from: null });
-          }
-        }
+        checkAndSetPeriodField('from', element.value);
         break;
       case 'to':
-        setPeriod({ ...period, to: element.value });
-        if (element.value.length === templateDatePeriod.length) {
-          if (
-            !regexDate.test(element.value) ||
-            !validatePeriod(element.value)
-          ) {
-            console.log('неправильный формат даты в поле ДО');
-            setPeriod({ ...period, to: null });
-          }
-        }
+        checkAndSetPeriodField('to', element.value);
         break;
       default:
         return;
@@ -123,8 +124,32 @@ export const ApplicationsStatisticsPage = () => {
     }
   };
 
+  const comparePeriodFields = () => {
+    if (
+      period.from?.length === templateDatePeriod.length &&
+      period.to?.length === templateDatePeriod.length
+    ) {
+      const [dateFrom, monthFrom, yearFrom] = splitDateField(period.from);
+      const [dateTo, monthTo, yearTo] = splitDateField(period.to);
+      if (
+        new Date(yearFrom, monthFrom - 1, dateFrom) <
+        new Date(yearTo, monthTo - 1, dateTo)
+      ) {
+        return true;
+      } else {
+        console.log('Поле "ДО" должно быть больше поля "ОТ"');
+        return false;
+      }
+    }
+  };
+
   const disabledButton =
-    !selectedCategoryFromAccordion || !period.from || !period.to;
+    !selectedCategoryFromAccordion ||
+    !period.from ||
+    !period.to ||
+    period.from.length < templateDatePeriod.length ||
+    period.to.length < templateDatePeriod.length ||
+    !comparePeriodFields();
 
   return (
     <>
