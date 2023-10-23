@@ -4,10 +4,10 @@
 }
 
 .period {
-  max-width: 353px;
+  max-width: 464px;
   box-sizing: border-box;
-  padding: 12px 0 10px;
-  margin-bottom: 20px;
+  padding: 12px 14px 0px 7px;
+  margin-bottom: 30px;
 }
 
 .period__fields {
@@ -15,11 +15,15 @@
   box-sizing: border-box;
   padding-left: 14px;
   align-items: center;
+  font-family: Golos, 'sans-serif'; 
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
 }
 
 .period__points {
   margin: 0 10px 0;
-  font-size: 12px;
 }
 
 .period__points:first-child {
