@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 import { useUpdateUsersMutation } from 'services/user-api';
 import { Loader } from 'shared/ui/loader';
 import useUser from 'shared/hooks/use-user';
+import { useLocation } from 'react-router-dom';
 
 export const UserInfo = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -94,7 +95,7 @@ export const UserInfo = () => {
     </InfoContainer>
   ) : (
     <InfoContainer name="Незарегистрированный пользователь">
-      <UnauthorizedUser />
+      {!isRegisterPath && <UnauthorizedUser />}
     </InfoContainer>
   );
 };
