@@ -41,6 +41,8 @@
   font-size: 12px;
   line-height: 12px;
   max-width: 96px;
+  font-family: Golos, 'sans-serif';
+  border: .5px solid var(--color, #818C99);
 }
 
 .status_application {
