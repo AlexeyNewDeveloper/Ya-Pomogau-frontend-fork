@@ -4,12 +4,13 @@ import { PageSubMenuAdminStatistics } from 'widgets/page-sub-menu/components/pag
 import styles from './styles.module.css';
 import Fieldset from 'shared/ui/fieldset';
 import { FieldsetView } from 'shared/ui/fieldset/utils';
-import { Input } from 'shared/ui/input';
 import { Accordion } from 'shared/ui/accordion';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
 import excelIconImage from '../../app/assets/images/ExcelIcon.svg';
 import { useState } from 'react';
+import DatePicker from 'react-datepicker';
+import { addYears } from 'date-fns';
 
 interface IStatusApplicationOptions {
   value: 'open' | 'atWork' | 'close';
@@ -21,21 +22,26 @@ export enum ButtonsNameForStatisticsPage {
   downloadReport = 'downloadReport',
 }
 
+export enum FieldsName {
+  to = 'to',
+  from = 'from',
+}
+
 export const ApplicationsStatisticsPage = () => {
   const statusApplicationOptions: Array<IStatusApplicationOptions> = [
     { value: 'open', label: 'Открытые' },
     { value: 'atWork', label: 'В работе' },
     { value: 'close', label: 'Закрытые' },
   ];
-  const regexDate = /^\d{1,2}\.\d{1,2}\.\d{4}$/;
   const templateDatePeriod = 'дд.мм.гггг';
+  const templateDateFormat = 'dd.MM.yyyy';
 
   const [selectedCategoryFromAccordion, setSelectedCategoryFromAccordion] =
     useState<string | null>(null);
 
   const [period, setPeriod] = useState<{
-    from: string | null;
-    to: string | null;
+    from: Date | null;
+    to: Date | null;
   }>({ from: null, to: null });
 
   const [
@@ -47,52 +53,18 @@ export const ApplicationsStatisticsPage = () => {
     setSelectedCategoryFromAccordion(value);
   };
 
-  const splitDateField = (value: string): number[] => {
-    const arrayDateValues = value.split('.');
-    const date = Number(arrayDateValues[0]);
-    const month = Number(arrayDateValues[1]);
-    const year = Number(arrayDateValues[2]);
-    return [date, month, year];
-  };
-
-  function daysInMonth(month: number, year: number): number {
-    return new Date(year, month, 0).getDate();
-  }
-
-  const validatePeriodField = (value: string): boolean => {
-    const [date, month, year] = splitDateField(value);
-    if (
-      month > 12 ||
-      date >= daysInMonth(month, year) ||
-      year > new Date().getFullYear()
-    ) {
-      return false;
-    }
-    return true;
-  };
-
-  const checkAndSetPeriodField = (fieldName: string, value: string): void => {
-    setPeriod({ ...period, [fieldName]: value });
-    if (value.length === templateDatePeriod.length) {
-      if (!regexDate.test(value) || !validatePeriodField(value)) {
-        console.log(`incorrect date format in the field "${fieldName}"`);
-        setPeriod({ ...period, [fieldName]: null });
-      }
-    }
-  };
-
-  const handleInputDate = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleInputDate = (
+    periodField: string,
+    date: Date,
+    e: React.FormEvent<HTMLInputElement>
+  ) => {
     e.preventDefault();
-    const element = e.target as HTMLInputElement;
-    if (element.value.length > templateDatePeriod.length) {
-      return;
-    }
-    switch (element.name) {
+    switch (periodField) {
       case 'from':
-        checkAndSetPeriodField('from', element.value);
+        setPeriod({ ...period, from: date });
         break;
       case 'to':
-        checkAndSetPeriodField('to', element.value);
+        setPeriod({ ...period, to: date });
         break;
       default:
         return;
@@ -124,32 +96,8 @@ export const ApplicationsStatisticsPage = () => {
     }
   };
 
-  const comparePeriodFields = () => {
-    if (
-      period.from?.length === templateDatePeriod.length &&
-      period.to?.length === templateDatePeriod.length
-    ) {
-      const [dateFrom, monthFrom, yearFrom] = splitDateField(period.from);
-      const [dateTo, monthTo, yearTo] = splitDateField(period.to);
-      if (
-        new Date(yearFrom, monthFrom - 1, dateFrom) <
-        new Date(yearTo, monthTo - 1, dateTo)
-      ) {
-        return true;
-      } else {
-        console.log('Поле "ДО" должно быть больше поля "ОТ"');
-        return false;
-      }
-    }
-  };
-
   const disabledButton =
-    !selectedCategoryFromAccordion ||
-    !period.from ||
-    !period.to ||
-    period.from.length < templateDatePeriod.length ||
-    period.to.length < templateDatePeriod.length ||
-    !comparePeriodFields();
+    !selectedCategoryFromAccordion || !period.from || !period.to;
 
   return (
     <>
@@ -168,21 +116,30 @@ export const ApplicationsStatisticsPage = () => {
           <Fieldset title="Период" view={FieldsetView.ROW}>
             <div className={styles.period__fields}>
               <p className={styles.period__points}>от</p>
-              <Input
-                name="from"
-                placeholder={templateDatePeriod}
-                extClassNameInput={styles.period__input_field}
-                onChange={handleInputDate}
-                value={period.from || ''}
+              <DatePicker
+                dateFormat={templateDateFormat}
+                selected={period.from}
+                name={FieldsName.from}
+                onChange={(date: Date, e: React.SyntheticEvent<any, Event>) => {
+                  handleInputDate(FieldsName.from, date, e);
+                }}
+                placeholderText={templateDatePeriod}
+                maxDate={period.to || new Date()}
+                minDate={addYears(new Date(), -2)}
+                className={styles.period__input_field}
               />
               <p className={styles.period__points}>до</p>
-              <Input
-                name="to"
-                placeholder={templateDatePeriod}
-                extClassName={styles.period__input}
-                extClassNameInput={styles.period__input_field}
-                onChange={handleInputDate}
-                value={period.to || ''}
+              <DatePicker
+                dateFormat={templateDateFormat}
+                selected={period.to}
+                name={FieldsName.to}
+                onChange={(date: Date, e: React.SyntheticEvent<any, Event>) => {
+                  handleInputDate(FieldsName.to, date, e);
+                }}
+                placeholderText={templateDatePeriod}
+                maxDate={new Date()}
+                minDate={period.from || addYears(new Date(), -2)}
+                className={styles.period__input_field}
               />
             </div>
           </Fieldset>
