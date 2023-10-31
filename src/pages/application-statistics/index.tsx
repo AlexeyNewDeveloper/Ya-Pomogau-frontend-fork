@@ -146,14 +146,12 @@ export const ApplicationsStatisticsPage = () => {
         </div>
         <div className={styles.status_application}>
           <Fieldset title="Статус заявки" view={FieldsetView.COLUMN}>
-            <div className={styles.status_application__fields}>
-              <Accordion
-                name="status_application"
-                arrayOptions={statusApplicationOptions}
-                onChange={handleFormAccordion}
-                placeholder="Выберите статус заявки"
-              />
-            </div>
+            <Accordion
+              name="status_application"
+              arrayOptions={statusApplicationOptions}
+              onChange={handleFormAccordion}
+              placeholder="Выберите статус заявки"
+            />
           </Fieldset>
         </div>
         <Checkbox
