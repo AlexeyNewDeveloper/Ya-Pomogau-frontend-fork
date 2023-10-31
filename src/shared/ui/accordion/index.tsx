@@ -73,12 +73,11 @@ export const Accordion = ({
             {arrayOptions.map((option, index) => {
               return (
                 <li className={classListItem} key={index}>
-                  <label htmlFor={option.value} className={classLabel}>
+                  <label className={classLabel}>
                     <input
                       type="radio"
                       name={name}
                       value={option.value}
-                      id={option.value}
                       className={classListInput}
                       defaultChecked={option.value === selectedCategory}
                     />

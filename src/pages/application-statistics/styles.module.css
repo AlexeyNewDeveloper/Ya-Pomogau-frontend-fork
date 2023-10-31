@@ -61,3 +61,28 @@
   display: flex;
   gap: 20px;
 }
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    margin-left: 12px;
+  }
+
+  .current_status_application_checkbox {
+    padding: 8px 0px;
+    box-sizing: border-box;
+    margin-bottom: 22px;
+  }
+
+  .status_application {
+    padding: 0px 14px 0 0px;
+    margin-bottom: 12px;
+    max-width: 285px;
+  }
+
+  .buttons_container {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    z-index: 0;
+  }
+}

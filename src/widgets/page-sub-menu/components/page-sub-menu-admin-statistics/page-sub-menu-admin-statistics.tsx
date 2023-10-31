@@ -1,14 +1,7 @@
 import { PageSubMenu } from '../page-sub-menu/page-sub-menu';
 import { PageSubMenuLink } from '../page-sub-menu-link/page-sub-menu-link';
-import styles from './styles.module.css';
 
-interface IPageSubMenuAdminStatisticsProps {
-  extClassName?: string;
-}
-
-export const PageSubMenuAdminStatistics = ({
-  extClassName,
-}: IPageSubMenuAdminStatisticsProps) => {
+export const PageSubMenuAdminStatistics = () => {
   return (
     <PageSubMenu
       links={
