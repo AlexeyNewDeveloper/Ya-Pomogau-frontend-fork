@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  max-width: 464px;
 }
 
 .list_container {
@@ -37,9 +36,9 @@
 
 .list_item {
   width: 100%;
-  max-height: 44px;
+  max-height: 47px;
   border: 0.5px solid var(--colors-interface-additional);
-  padding: 11px 12px;
+  padding: 10px 12px 11px;
   box-sizing: border-box;
   color: var(--colors-interface-black);
   font-feature-settings: 'clig' off, 'liga' off;
