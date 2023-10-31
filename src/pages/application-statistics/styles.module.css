@@ -6,16 +6,17 @@
 .period {
   max-width: 464px;
   box-sizing: border-box;
-  padding: 12px 14px 0px 7px;
+  padding: 12px 14px 0px 0px;
   margin-bottom: 30px;
 }
+
 
 .period__fields {
   display: flex;
   box-sizing: border-box;
   padding-left: 14px;
   align-items: center;
-  font-family: Golos, 'sans-serif'; 
+  font-family: Golos, 'sans-serif';
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
@@ -43,16 +44,16 @@
 }
 
 .status_application {
-  max-width: 464px;
+  max-width: 494px;
   box-sizing: border-box;
-  padding: 12px 14px 0 7px;
+  padding: 0px 14px 0 14px;
   margin-bottom: 20px;
 }
 
 .current_status_application_checkbox {
-  padding: 11px 15px;
+  padding: 8px 20px;
   box-sizing: border-box;
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 .buttons_container {
