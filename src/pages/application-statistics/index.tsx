@@ -7,7 +7,6 @@ import { FieldsetView } from 'shared/ui/fieldset/utils';
 import { Accordion } from 'shared/ui/accordion';
 import Checkbox from 'shared/ui/checkbox';
 import { Button } from 'shared/ui/button';
-import excelIconImage from '../../app/assets/images/ExcelIcon.svg';
 import { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { addYears } from 'date-fns';
@@ -27,15 +26,15 @@ export enum FieldsName {
   from = 'from',
 }
 
-export const ApplicationsStatisticsPage = () => {
-  const statusApplicationOptions: Array<IStatusApplicationOptions> = [
-    { value: 'open', label: 'Открытые' },
-    { value: 'atWork', label: 'В работе' },
-    { value: 'close', label: 'Закрытые' },
-  ];
-  const templateDatePeriod = 'дд.мм.гггг';
-  const templateDateFormat = 'dd.MM.yyyy';
+const statusApplicationOptions: Array<IStatusApplicationOptions> = [
+  { value: 'open', label: 'Открытые' },
+  { value: 'atWork', label: 'В работе' },
+  { value: 'close', label: 'Закрытые' },
+];
+const templateDatePeriod = 'дд.мм.гггг';
+const templateDateFormat = 'dd.MM.yyyy';
 
+export const ApplicationsStatisticsPage = () => {
   const [selectedCategoryFromAccordion, setSelectedCategoryFromAccordion] =
     useState<string | null>(null);
 
@@ -120,7 +119,10 @@ export const ApplicationsStatisticsPage = () => {
                 dateFormat={templateDateFormat}
                 selected={period.from}
                 name={FieldsName.from}
-                onChange={(date: Date, e: React.SyntheticEvent<any, Event>) => {
+                onChange={(
+                  date: Date,
+                  e: React.SyntheticEvent<HTMLInputElement, Event>
+                ) => {
                   handleInputDate(FieldsName.from, date, e);
                 }}
                 placeholderText={templateDatePeriod}
@@ -133,7 +135,10 @@ export const ApplicationsStatisticsPage = () => {
                 dateFormat={templateDateFormat}
                 selected={period.to}
                 name={FieldsName.to}
-                onChange={(date: Date, e: React.SyntheticEvent<any, Event>) => {
+                onChange={(
+                  date: Date,
+                  e: React.SyntheticEvent<HTMLInputElement, Event>
+                ) => {
                   handleInputDate(FieldsName.to, date, e);
                 }}
                 placeholderText={templateDatePeriod}
