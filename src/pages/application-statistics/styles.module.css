@@ -10,7 +10,6 @@
   margin-bottom: 30px;
 }
 
-
 .period__fields {
   display: flex;
   box-sizing: border-box;
@@ -42,7 +41,7 @@
   line-height: 12px;
   max-width: 96px;
   font-family: Golos, 'sans-serif';
-  border: .5px solid var(--color, #818C99);
+  border: 0.5px solid var(--color, #818c99);
 }
 
 .status_application {

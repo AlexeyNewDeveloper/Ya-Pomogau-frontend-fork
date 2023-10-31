@@ -177,7 +177,7 @@ export const ApplicationsStatisticsPage = () => {
             id={ButtonsNameForStatisticsPage.downloadReport}
             name={ButtonsNameForStatisticsPage.downloadReport}
             disabled={disabledButton}
-            customIcon={<img src={excelIconImage} alt="excelIcon" />}
+            customIcon={<Icon icon="ExcelIcon" color="blue" />}
           />
         </div>
       </form>
