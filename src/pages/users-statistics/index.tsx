@@ -8,7 +8,6 @@ import Fieldset from 'shared/ui/fieldset';
 import { FieldsetView } from 'shared/ui/fieldset/utils';
 import { ButtonsNameForStatisticsPage } from 'pages/application-statistics';
 import { useState } from 'react';
-import excelIconImage from '../../app/assets/images/ExcelIcon.svg';
 
 interface IUsersRoleOptions {
   value: 'volunteer' | 'recipient';
@@ -20,18 +19,19 @@ interface IUsersStatusOptions {
   label: 'Новый' | 'Активный' | 'Не активный' | 'Заблокированный';
 }
 
-export const UsersStatisticsPage = () => {
-  const usersRoleOptions: Array<IUsersRoleOptions> = [
-    { value: 'volunteer', label: 'Волонтер' },
-    { value: 'recipient', label: 'Реципиент' },
-  ];
-  const usersStatusOptions: Array<IUsersStatusOptions> = [
-    { value: 'new', label: 'Новый' },
-    { value: 'activ', label: 'Активный' },
-    { value: 'notActive', label: 'Не активный' },
-    { value: 'blocked', label: 'Заблокированный' },
-  ];
+export const usersRoleOptions: Array<IUsersRoleOptions> = [
+  { value: 'volunteer', label: 'Волонтер' },
+  { value: 'recipient', label: 'Реципиент' },
+];
 
+export const usersStatusOptions: Array<IUsersStatusOptions> = [
+  { value: 'new', label: 'Новый' },
+  { value: 'activ', label: 'Активный' },
+  { value: 'notActive', label: 'Не активный' },
+  { value: 'blocked', label: 'Заблокированный' },
+];
+
+export const UsersStatisticsPage = () => {
   const [statusAccordion, setStatusAccordion] = useState<string | null>(null);
   const [roleAccordion, setRoleAccordion] = useState<string | null>(null);
 
@@ -113,7 +113,7 @@ export const UsersStatisticsPage = () => {
             id={ButtonsNameForStatisticsPage.downloadReport}
             name={ButtonsNameForStatisticsPage.downloadReport}
             disabled={disabledButton}
-            customIcon={<img src={excelIconImage} alt="excelIcon" />}
+            customIcon={<Icon color="blue" icon="ExcelIcon" />}
           />
         </div>
       </form>

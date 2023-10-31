@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
-import { IconArrow } from '../select';
 import { useState } from 'react';
+import { Icon } from '../icons';
 
 interface IAccordionProps {
   extraClasses?: {
@@ -58,7 +58,11 @@ export const Accordion = ({
         onClick={handleButtonOpenList}
       >
         <div>{placeholder}</div>
-        <IconArrow extClassName={isOpenList ? styles.icon_arrow : ''} />
+        <Icon
+          icon="AccordionIconArrow"
+          color="#9798C9"
+          className={isOpenList ? styles.icon_arrow : ''}
+        />
       </button>
       {isOpenList && (
         <fieldset
