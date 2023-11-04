@@ -12,11 +12,13 @@ import useUser from 'shared/hooks/use-user';
 import { useLocation } from 'react-router-dom';
 
 export const UserInfo = () => {
+  const location = useLocation();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [isFormSaved, setIsFormSaved] = useState(false);
   const [isFormEdited, setIsFormEdited] = useState(false);
   const [image, setImage] = useState<string>('');
   const [updateUserData, { isLoading }] = useUpdateUsersMutation();
+  const isRegisterPath = location.pathname.includes('/register');
   const user = useUser();
   const isAuth = user?.isActive;
 
