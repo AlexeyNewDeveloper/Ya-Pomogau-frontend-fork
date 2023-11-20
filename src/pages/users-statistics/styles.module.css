@@ -31,15 +31,15 @@
 
 @media screen and (max-width: 600px) {
   .wrapper {
-    margin-left: 0px;  
+    margin-left: 0px;
   }
 
-    .status {
-      max-width: 285px;
-    }
+  .status {
+    max-width: 285px;
+  }
 
-    .role {
-      max-width: 285px;
-      margin-bottom: 5px;
-    }
+  .role {
+    max-width: 285px;
+    margin-bottom: 5px;
+  }
 }
